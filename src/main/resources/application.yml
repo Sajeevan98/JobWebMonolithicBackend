@@ -1,0 +1,56 @@
+server:
+  port: 8081
+  # use for 'shutdown-actuator'
+  shutdown: graceful
+
+# for H2 database connection.
+#spring:
+#  application:
+#    name: myJobWeb
+#  h2:
+#    console:
+#      enabled: true
+#  datasource:
+#    url: jdbc:h2:mem:jobs
+#  jpa:
+#    hibernate:
+#      ddlAuto: update
+
+# for Postgresql database connection.
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/jobweb
+    username: postgres
+    password: root@123
+  jpa:
+    database: POSTGRESQL
+    showSQL: true # for development purpose only...
+    hibernate:
+      ddl-auto: update
+    databasePlatform: org.hibernate.dialect.PostgreSQLDialect
+
+
+# for Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      showDetails: always
+    # enable '/shutdown' by POST request
+    shutdown:
+      enabled: true
+  # enable '/info'
+  info:
+    env:
+      enabled: true
+
+# set details to "/info"
+info:
+  app:
+    name: JobWeb
+    description: JobWep application build by Sajeevan.V
+    version: 1.0.0
+
